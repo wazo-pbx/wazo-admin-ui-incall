@@ -1,0 +1,2 @@
+recursive-include incall/templates *
+recursive-include incall/static *

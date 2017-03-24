@@ -9,7 +9,10 @@ from wtforms.fields import StringField
 
 from wtforms.validators import InputRequired
 
+from wazo_admin_ui.helpers.destination import DestinationField
+
 
 class IncallForm(FlaskForm):
     did = StringField('Did', [InputRequired()])
+    destination = DestinationField()
     submit = SubmitField('Submit')

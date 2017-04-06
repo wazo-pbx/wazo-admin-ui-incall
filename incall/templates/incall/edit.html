@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block content %}
-  {% call build_form_containers('Incall' ~ ' ' ~ resources.incall.name, 'long-arrow-right') %}
-    {% call build_form(action=url_for('.IncallView:put', id=resources.incall.id)) %}
-      {% call add_default_fields(form=form, submit_value="Update") %}
-        {{ render_field(form.did) }}
+  {% call build_section_row() %}
+    {% call build_form_box('Incall', resources.incall.name, 'long-arrow-right') %}
+      {% call build_form(action=url_for('.IncallView:put', id=resources.incall.id)) %}
+        {% call add_default_fields(form=form, submit_value="Update") %}
+          {{ render_field(form.did) }}
+        {% endcall %}
       {% endcall %}
     {% endcall %}
   {% endcall %}

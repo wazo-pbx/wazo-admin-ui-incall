@@ -8,12 +8,20 @@ from flask_menu.classy import classy_menu_item
 from marshmallow import fields
 
 from wazo_admin_ui.helpers.classful import BaseView
+from wazo_admin_ui.helpers.destination import DestinationSchema
 from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
 
 from .form import IncallForm
 
 
+class ExtensionSchema(BaseSchema):
+    exten = fields.String(attribute='extension')
+    context = fields.String(attribute='context')
+
+
 class IncallSchema(BaseSchema):
+
+    destination = fields.Nested(DestinationSchema)
 
     class Meta:
         fields = extract_form_fields(IncallForm)
@@ -23,6 +31,7 @@ class AggregatorSchema(BaseAggregatorSchema):
     _main_resource = 'incall'
 
     incall = fields.Nested(IncallSchema)
+    extension = fields.Nested(ExtensionSchema)
 
 
 class IncallView(BaseView):

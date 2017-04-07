@@ -16,9 +16,8 @@ class Plugin(object):
 
     def load(self, dependencies):
         core = dependencies['flask']
-        config = dependencies['config']
 
-        IncallView.service = IncallService(config['confd'])
+        IncallView.service = IncallService()
         IncallView.register(incall, route_base='/incalls')
         register_flaskview(incall, IncallView)
 

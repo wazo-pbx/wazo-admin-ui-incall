@@ -51,8 +51,8 @@
     {% call build_hidden_add_containers('Add Incall') %}
       {% call build_form() %}
         {% call add_default_fields(form=form, submit_value="Add") %}
-          {{ render_field(form.extension) }}
-          {{ render_field(form.context, data_listing_href=url_for(listing_urls['context_by_type'], type_='incall')) }}
+          {{ render_field(form.extensions[0].exten) }}
+          {{ render_field(form.extensions[0].context, data_listing_href=url_for(listing_urls['context_by_type'], type_='incall')) }}
           {{ render_field(form.destination, with_label=False) }}
         {% endcall %}
       {% endcall %}

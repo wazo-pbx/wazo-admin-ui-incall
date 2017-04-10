@@ -5,41 +5,33 @@
 from __future__ import unicode_literals
 
 from flask_menu.classy import classy_menu_item
-from marshmallow import fields
 
 from wazo_admin_ui.helpers.classful import BaseView
-from wazo_admin_ui.helpers.destination import DestinationSchema
-from wazo_admin_ui.helpers.mallow import BaseSchema, BaseAggregatorSchema, extract_form_fields
 
 from .form import IncallForm
-
-
-class ExtensionSchema(BaseSchema):
-    exten = fields.String(attribute='extension')
-    context = fields.String(attribute='context')
-
-
-class IncallSchema(BaseSchema):
-
-    destination = fields.Nested(DestinationSchema)
-
-    class Meta:
-        fields = extract_form_fields(IncallForm)
-
-
-class AggregatorSchema(BaseAggregatorSchema):
-    _main_resource = 'incall'
-
-    incall = fields.Nested(IncallSchema)
-    extension = fields.Nested(ExtensionSchema)
 
 
 class IncallView(BaseView):
 
     form = IncallForm
     resource = 'incall'
-    schema = AggregatorSchema
 
     @classy_menu_item('.incalls', 'Incalls', order=4, icon="long-arrow-right")
     def index(self):
         return super(IncallView, self).index()
+
+    def _map_resources_to_form(self, resources):
+        return self.form(data=resources['incall'])
+
+    def _map_form_to_resources(self, form, form_id=None):
+        incall = form.to_dict()
+        resources = {'incall': incall,
+                     'extension': incall['extensions'][0]}
+        if form_id:
+            resources['incall']['id'] = form_id
+        return resources
+
+    def _map_resources_to_form_errors(self, form, resources):
+        form.populate_errors(resources.get('incall', {}))
+        form.extensions[0].populate_errors(resources.get('extension', {}))
+        return form

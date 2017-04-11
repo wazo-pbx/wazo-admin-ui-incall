@@ -20,17 +20,6 @@ class IncallView(BaseView):
     def index(self):
         return super(IncallView, self).index()
 
-    def _map_resources_to_form(self, resources):
-        return self.form(data=resources['incall'])
-
-    def _map_form_to_resources(self, form, form_id=None):
-        incall = form.to_dict()
-        resources = {'incall': incall,
-                     'extension': incall['extensions'][0]}
-        if form_id:
-            resources['incall']['id'] = form_id
-        return resources
-
     def _map_resources_to_form_errors(self, form, resources):
         form.populate_errors(resources.get('incall', {}))
         form.extensions[0].populate_errors(resources.get('extension', {}))

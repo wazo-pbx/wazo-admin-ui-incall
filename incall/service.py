@@ -7,5 +7,4 @@ from wazo_admin_ui.helpers.service import BaseConfdExtensionService
 
 class IncallService(BaseConfdExtensionService):
 
-    resource_name = 'incall'
     resource_confd = 'incalls'

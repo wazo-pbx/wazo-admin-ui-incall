@@ -1,2 +1,2 @@
-recursive-include incall/templates *
-recursive-include incall/static *
+recursive-include wazo_plugind_admin_ui_incall_official/templates *
+recursive-include wazo_plugind_admin_ui_incall_official/static *

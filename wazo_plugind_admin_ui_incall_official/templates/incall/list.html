@@ -8,11 +8,10 @@
   <section class="content">
     {% call build_list_containers('Incalls', 'long-arrow-right') %}
       {% call build_list_table() %}
-        {% call build_list_table_headers() %}
+        {% call build_list_table_headers(get=url_for('.IncallView:get', id=''), delete=url_for('.IncallView:delete', id='')) %}
           <th>Did</th>
           <th>Destination</th>
           <th>Identity</th>
-          {{ add_list_table_header_action() }}
         {% endcall %}
         {% call(incall) build_list_table_rows(resource_list['items']) %}
           <td>
@@ -39,10 +38,6 @@
             {% else %}
               -
             {% endif %}
-          </td>
-          <td>
-            {{ add_edit_button(href=url_for('.IncallView:get', id=incall.id)) }}
-            {{ add_delete_button(href=url_for('.IncallView:delete', id=incall.id)) }}
           </td>
         {% endcall %}
       {% endcall %}

@@ -1,7 +1,7 @@
 # Copyright 2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
-from wtforms.fields import SubmitField, StringField, SelectField, FieldList, FormField
+from wtforms.fields import SubmitField, StringField, SelectField, FieldList, FormField, HiddenField
 
 from wtforms.validators import InputRequired
 
@@ -10,7 +10,8 @@ from wazo_admin_ui.helpers.form import BaseForm
 
 
 class ExtensionForm(BaseForm):
-    exten = StringField('Did', [InputRequired()])
+    id = HiddenField()
+    exten = SelectField('Did', [InputRequired()],choices=[])
     context = SelectField('Context', choices=[])
 
 

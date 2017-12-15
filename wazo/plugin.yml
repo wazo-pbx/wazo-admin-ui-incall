@@ -8,3 +8,8 @@ tags:
   - beta
   - routing
 homepage: https://github.com/wazo-pbx/wazo-admin-ui-incall
+depends:
+  - name: admin-ui-context
+    namespace: official
+  - name: admin-ui-extension
+    namespace: official

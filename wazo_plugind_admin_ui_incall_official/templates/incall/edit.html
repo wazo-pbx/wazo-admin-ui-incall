@@ -9,11 +9,25 @@
     {% call build_form_box('Incall', resource.name, 'long-arrow-right') %}
       {% call build_form(action=url_for('.IncallView:put', id=resource.id)) %}
         {% call add_default_fields(form=form, submit_value="Update") %}
-          {{ render_field(form.extensions[0].exten) }}
-          {{ render_field(form.extensions[0].context, data_listing_href=url_for(listing_urls['context_by_type'], type_='incall')) }}
+          {{ render_field(form.extensions[0].exten,
+                          data_allow_custom_values=True,
+                          divclass='col-sm-2',
+                          inputclass='ui-helper-clearfix',
+                          class_='incall-exten',
+                          data_available_extension_href=url_for(listing_urls['available_extension_incall'])) }}
+          {{ render_field(form.extensions[0].context,
+                          with_label=False,
+                          divclass='col-sm-4',
+                          class_='incall-context',
+                          placeholder='Choose Incall Context',
+                          data_listing_href=url_for(listing_urls['context_by_type'], type_='incall')) }}
           {{ render_field(form.destination, with_label=False) }}
         {% endcall %}
       {% endcall %}
     {% endcall %}
   {% endcall %}
+{% endblock %}
+
+{% block additional_js %}
+  <script src="{{ url_for('.static', filename='js/incall.js') }}"></script>
 {% endblock %}

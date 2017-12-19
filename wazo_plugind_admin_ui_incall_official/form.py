@@ -11,7 +11,7 @@ from wazo_admin_ui.helpers.form import BaseForm
 
 class ExtensionForm(BaseForm):
     id = HiddenField()
-    exten = SelectField('Did', [InputRequired()],choices=[])
+    exten = SelectField('Did', [InputRequired()], choices=[])
     context = SelectField('Context', choices=[])
 
 

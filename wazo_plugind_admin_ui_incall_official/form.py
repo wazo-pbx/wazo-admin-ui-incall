@@ -19,4 +19,11 @@ class IncallForm(BaseForm):
     extensions = FieldList(FormField(ExtensionForm), min_entries=1)
     destination = DestinationField()
     preprocess_subroutine = StringField('Preprocess Subroutine', [Length(max=39)])
+    caller_id_mode = SelectField('Caller ID mode', choices=[
+        ('', 'None'),
+        ('prepend', 'Prepend'),
+        ('overwrite', 'Overwrite'),
+        ('append', 'Append')
+    ])
+    caller_id_name = StringField('Caller ID name', [Length(max=80)])
     submit = SubmitField('Submit')

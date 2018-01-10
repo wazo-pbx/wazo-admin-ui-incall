@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb('Incall', '', 'long-arrow-right', ['List']) }}
+  {{ build_breadcrumb(_('Incall'), '', 'long-arrow-right', ['List']) }}
 {% endblock %}
 
 {% block content %}
   <section class="content">
-    {% call build_list_containers('Incalls', 'long-arrow-right') %}
+    {% call build_list_containers(_('Incalls'), 'long-arrow-right') %}
       {% call build_list_table() %}
         {% call build_list_table_headers(get=url_for('.IncallView:get', id=''), delete=url_for('.IncallView:delete', id='')) %}
           <th>Did</th>
@@ -43,9 +43,9 @@
       {% endcall %}
     {% endcall %}
 
-    {% call build_hidden_add_containers('Add Incall') %}
+    {% call build_hidden_add_containers(_('Add Incall')) %}
       {% call build_form() %}
-        {% call add_default_fields(form=form, submit_value="Add") %}
+        {% call add_default_fields(form=form, submit_value=_('Add')) %}
           {{ render_field(form.extensions[0].exten,
                           data_allow_custom_values=True,
                           divclass='col-sm-4 clear',

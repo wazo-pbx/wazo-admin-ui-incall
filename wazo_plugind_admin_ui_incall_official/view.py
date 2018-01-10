@@ -1,6 +1,7 @@
 # Copyright 2017 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
+from flask_babel import lazy_gettext as l_
 from flask_menu.classy import classy_menu_item
 
 from wazo_admin_ui.helpers.classful import BaseView
@@ -13,7 +14,7 @@ class IncallView(BaseView):
     form = IncallForm
     resource = 'incall'
 
-    @classy_menu_item('.incalls', 'Incalls', order=4, icon="long-arrow-right")
+    @classy_menu_item('.incalls', l_('Incalls'), order=4, icon="long-arrow-right")
     def index(self):
         return super(IncallView, self).index()
 

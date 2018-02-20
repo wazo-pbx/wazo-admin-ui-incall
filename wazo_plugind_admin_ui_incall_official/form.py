@@ -1,4 +1,4 @@
-# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from flask_babel import lazy_gettext as l_
@@ -15,6 +15,11 @@ class ExtensionForm(BaseForm):
     context = SelectField(l_('Context'), choices=[])
 
 
+class ScheduleForm(BaseForm):
+    id = SelectField(l_('Schedule'), choices=[])
+    name = HiddenField()
+
+
 class IncallForm(BaseForm):
     extensions = FieldList(FormField(ExtensionForm), min_entries=1)
     destination = DestinationField()
@@ -26,4 +31,5 @@ class IncallForm(BaseForm):
         ('append', l_('Append'))
     ])
     caller_id_name = StringField(l_('Caller ID name'), [Length(max=80)])
+    schedules = FieldList(FormField(ScheduleForm), min_entries=1)
     submit = SubmitField(l_('Submit'))

@@ -1,4 +1,4 @@
-# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# Copyright 2017-2018 The Wazo Authors  (see the AUTHORS file)
 # SPDX-License-Identifier: GPL-3.0+
 
 from flask_babel import lazy_gettext as l_
@@ -10,7 +10,6 @@ from .form import IncallForm
 
 
 class IncallView(BaseView):
-
     form = IncallForm
     resource = 'incall'
 
@@ -21,6 +20,7 @@ class IncallView(BaseView):
     def _populate_form(self, form):
         form.extensions[0].exten.choices = self._build_set_choices_exten(form.extensions[0])
         form.extensions[0].context.choices = self._build_set_choices_context(form.extensions[0])
+        form.schedules[0].form.id.choices = self._build_set_choices_schedule(form.schedules[0])
         return form
 
     def _build_set_choices_exten(self, extension):
@@ -38,6 +38,11 @@ class IncallView(BaseView):
             return [(context['name'], context['label'])]
 
         return [(extension.context.data, extension.context.data)]
+
+    def _build_set_choices_schedule(self, schedule):
+        if not schedule.form.id.data or schedule.form.id.data == 'None':
+            return []
+        return [(schedule.form.id.data, schedule.form.name.data)]
 
     def _map_resources_to_form_errors(self, form, resources):
         form.populate_errors(resources.get('incall', {}))

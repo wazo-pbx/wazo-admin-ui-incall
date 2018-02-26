@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content_header %}
-  {{ build_breadcrumb(_('Incall'), '', 'long-arrow-right', ['List']) }}
+  {{ build_breadcrumb(_('Incall'), '', 'long-arrow-right', [_('List')]) }}
 {% endblock %}
 
 {% block content %}
@@ -9,9 +9,9 @@
     {% call build_list_containers(_('Incalls'), 'long-arrow-right') %}
       {% call build_list_table() %}
         {% call build_list_table_headers(get=url_for('.IncallView:get', id=''), delete=url_for('.IncallView:delete', id='')) %}
-          <th>Did</th>
-          <th>Destination</th>
-          <th>Identity</th>
+          <th>{{ _('Did') }}</th>
+          <th>{{ _('Destination') }}</th>
+          <th>{{ _('Identity') }}</th>
         {% endcall %}
         {% call(incall) build_list_table_rows(resource_list['items']) %}
           <td>
